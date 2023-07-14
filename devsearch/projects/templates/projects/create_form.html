@@ -1,13 +1,34 @@
-{% extends 'main.html' %}
+{% extends 'main.html' %} {% block content %}
 
+<!-- Main Section -->
+<main class="formPage my-xl">
+  <div class="content-box">
+    <div class="formWrapper">
+      <a class="backButton" href="#"><i class="im im-angle-left"></i></a>
+      <br />
 
-{% block content %}
-<h1>Project Form</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
+      <form class="form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Input:Text -->
+        <div class="form__field">
+          <label for="formInput#text">{{form.label}}</label>
+          {{form}}
+          <input
+            class="input input--text"
+            id="formInput#text"
+            type="text"
+            name="text"
+            placeholder="Enter text"
+          />
+        </div>
 
-    <input type="submit"></input>
-
-</form>
+        <input
+          class="btn btn--sub btn--lg my-md"
+          type="submit"
+          value="Submit"
+        />
+      </form>
+    </div>
+  </div>
+</main>
 {% endblock %}
