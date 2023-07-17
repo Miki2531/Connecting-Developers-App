@@ -44,8 +44,9 @@
                 <p>
                   <a
                     class="project__author"
-                    href="{% url 'project' project.id %}"
-                    >By {{project.owner.name}}</a>
+                    href="{% url 'user-profile' project.owner.id %}"
+                    >By {{project.owner.name}}</a
+                  >
                 </p>
                 <p class="project--rating">
                   <span style="font-weight: bold">{{project.vote_ratio}}%</span>
