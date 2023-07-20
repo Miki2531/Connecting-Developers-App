@@ -30,9 +30,9 @@
       </ul>
     {% endif %}
 
-    {% if message %}
+    {% if messages %}
     {% for message in messages %}
-       <div class="alert--{{message.tags}}">
+       <div class="alert alert--{{message.tags}}">
         <p class="alert__message">{{message}}</p>
         <button class="alert__close">x</button>
 
@@ -41,4 +41,5 @@
     {% endif %}
      {% block content %} {% endblock content %}
   </body>
+  <style src="{% static 'uikit/app.js' %}"></style>
 </html>
