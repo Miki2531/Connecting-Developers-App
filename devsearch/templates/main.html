@@ -29,6 +29,16 @@
       {% endfor %}
       </ul>
     {% endif %}
+
+    {% if message %}
+    {% for message in messages %}
+       <div class="alert--{{message.tags}}">
+        <p class="alert__message">{{message}}</p>
+        <button class="alert__close">x</button>
+
+       </div>
+    {% endfor%}
+    {% endif %}
      {% block content %} {% endblock content %}
   </body>
 </html>
