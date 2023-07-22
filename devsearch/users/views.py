@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Profile
-from .forms import CustomUserCreattionForm
+from .forms import CustomUserCreattionForm, ProfileForm
 # Create your views here.
 
 
@@ -74,3 +74,17 @@ def userProfile(request, pk):
     context = {'profile': profile, 'topSkills': topSkills,
                'otherSkills': otherSkills}
     return render(request, 'users/user-profile.html', context)
+
+
+def userProfile(request):
+    profile = request.user.profile
+    skills = profile.skill_set.all()
+    projects = profile.project_set.all()
+    context = {'profile': profile, 'skills': skills, 'projects': projects}
+    return render(request, 'users/account.html', context)
+
+
+def editAccount(request):
+    form = ProfileForm()
+    context = {'form': form}
+    return render(request, 'users/profile_edit.html')
