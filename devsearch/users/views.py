@@ -53,7 +53,7 @@ def userRegister(request):
             messages.success(request, 'User was register successfully!!')
 
             login(request, user)
-            return redirect('profiles')
+            return redirect('edit-account')
 
         else:
             messages.success(request, 'Error has occured during registration.')
@@ -76,6 +76,7 @@ def userProfile(request, pk):
                'otherSkills': otherSkills}
     return render(request, 'users/user-profile.html', context)
 
+
 @login_required(login_url='login')
 def userProfile(request):
     profile = request.user.profile
@@ -84,10 +85,11 @@ def userProfile(request):
     context = {'profile': profile, 'skills': skills, 'projects': projects}
     return render(request, 'users/account.html', context)
 
+
 @login_required(login_url='login')
 def editAccount(request):
     profile = request.user.profile
-    form = ProfileForm()
+    form = ProfileForm(instance=profile)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
