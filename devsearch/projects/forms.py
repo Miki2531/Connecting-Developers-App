@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Project
+from .models import Project, Review
 
 
 class ProjectForm(ModelForm):
@@ -20,3 +20,12 @@ class ProjectForm(ModelForm):
 
         # self.fields['title'].widget.attrs.update(
         #     {'class': 'input', 'placeholder': 'Add title'})
+
+
+class ReviewForm(ModelForm):
+    class Meta:
+        fields = ['value', 'body']
+        labels = {
+            'value': 'Vote your value',
+            'body': 'Add comments to the projects..'
+        }
