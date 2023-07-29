@@ -28,7 +28,7 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
-            return redirect(request.GET['next'] if 'next' in  request.GET else 'account')
+            return redirect(request.GET['next'] if 'next' in request.GET else 'account')
         else:
             messages.error(request, 'Username or password is incorrect!!')
 
@@ -72,7 +72,9 @@ def profiles(request):
     return render(request, 'users/profiles.html', context)
 
 
+@login_required(login_url='login')
 def userProfile(request, pk):
+    profile = request.user.profile
     profile = Profile.objects.get(id=pk)
     topSkills = profile.skill_set.exclude(description__exact="")
     otherSkills = profile.skill_set.filter(description="")
@@ -81,13 +83,13 @@ def userProfile(request, pk):
     return render(request, 'users/user-profile.html', context)
 
 
-@login_required(login_url='login')
-def userProfile(request):
-    profile = request.user.profile
-    skills = profile.skill_set.all()
-    projects = profile.project_set.all()
-    context = {'profile': profile, 'skills': skills, 'projects': projects}
-    return render(request, 'users/account.html', context)
+# @login_required(login_url='login')
+# def userProfile(request):
+#     profile = request.user.profile
+#     skills = profile.skill_set.all()
+#     projects = profile.project_set.all()
+#     context = {'profile': profile, 'skills': skills, 'projects': projects}
+#     return render(request, 'users/account.html', context)
 
 
 @login_required(login_url='login')

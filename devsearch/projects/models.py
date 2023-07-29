@@ -22,7 +22,7 @@ class Project(models.Model):
     def __str__(self):
         return self.title
     class Meta:
-        ordering = ['-vote_ration', '-vote_total', 'title']
+        ordering = ['-vote_ratio', '-vote_total', 'title']
 
 
     @property
