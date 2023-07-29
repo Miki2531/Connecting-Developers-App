@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from .models import Profile
 
 from django.core.mail import send_mail
-from django.core import settings
+from django.conf import settings
+
 
 def createProfile(sender, instance, created, **kwargs):
     if created:
@@ -24,12 +25,11 @@ def createProfile(sender, instance, created, **kwargs):
             message,
             settings.EMAIL_HOST_USER,
             [profile.email],
-            fail_silently= True
+            fail_silently=True
         )
 
 
-
-def updateUser(sender, instance, created, **kwargs): 
+def updateUser(sender, instance, created, **kwargs):
     profile = instance
     user = profile.user
     if created == False:
@@ -37,7 +37,6 @@ def updateUser(sender, instance, created, **kwargs):
         user.username = profile.username
         user.email = profile.email
         user.save()
-
 
 
 def deleteProfile(sender, instance, **kwargs):
